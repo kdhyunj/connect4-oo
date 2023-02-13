@@ -6,7 +6,7 @@
  */
 class Game {
   constructor(p1, p2, height = 6, width = 7){
-    this.players=[p1, p2];
+    this.players = [p1, p2];
     this.height = height;
     this.width = width;
     this.board = [];
@@ -63,7 +63,7 @@ class Game {
   placeInTable(y, x) {
     const piece = document.createElement('div');
     piece.classList.add('piece');
-    piece.classList.add(`p${this.currPlayer}`);
+    piece.style.backgroundColor = this.currPlayer.color;
     piece.style.top = -50 * (y + 2);
   
     const spot = document.getElementById(`${y}-${x}`);
@@ -91,11 +91,11 @@ class Game {
     // check for win
     if (this.checkForWin()) {
       this.gameOver = true;
-      return this.endGame(`Player ${this.currPlayer} won!`);
+      return this.endGame(`${this.currPlayer.color} player won!`);
     }
     
     // check for tie
-    if (thidsboard.every(row => row.every(cell => cell))) {
+    if (this.board.every(row => row.every(cell => cell))) {
       return this.endGame('Tie!');
     }
       
